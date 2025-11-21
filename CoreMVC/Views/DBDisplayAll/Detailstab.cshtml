@@ -1,0 +1,42 @@
+﻿@model CoreMVC.Models.Employee
+<div>
+    <h4>Display Details</h4>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model=>model.eid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.eid)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ename)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ename)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.eaddr)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.eaddr)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.esal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.esal)
+        </dd>
+    </dl>
+</div>
+<p>
+    @using (Html.BeginForm("Edittab","DBDisplayAll",
+    new{id=Model.eid},FormMethod.Post))
+    {
+        <button class="btn btn-success btn-xs"
+        type="submit">
+        Edit
+    </button>
+    }
+</p>
+@Html.ActionLink("Back to List","AllProfile_Pageload","DBDisplayAll")

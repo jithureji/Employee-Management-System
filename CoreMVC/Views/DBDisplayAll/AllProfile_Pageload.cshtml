@@ -1,0 +1,77 @@
+﻿@model IEnumerable<CoreMVC.Models.Employee>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">Employee Profiles</h3>
+        @Html.ActionLink("Insert New Employee", "Index_Pageload", "DBInsert", null, new { @class = "btn btn-primary" })
+    </div>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <table class="table table-bordered table-striped text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Salary</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in Model)
+            {
+                <tr>
+                    <td>@emp.eid</td>
+                    <td>@emp.ename</td>
+                    <td>@emp.eaddr</td>
+                    <td>@emp.esal</td>
+                    <td>
+                        @using (Html.BeginForm("DeleteDB","DBDisplayAll",
+                       new { id = emp.eid }, FormMethod.Post))
+                        {
+                            <button class="btn btn-danger btn-xs"
+                            type="submit">
+                            Delete
+                        </button>
+                        }
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("Edittab", "DBDisplayAll",
+                                            new { id = emp.eid }, FormMethod.Post))
+                        {
+                            <button class="btn btn-danger btn-xs"
+                                    type="submit">
+                                Edit
+                            </button>
+                        }
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("Detailstab", "DBDisplayAll",
+                                            new { id = emp.eid }, FormMethod.Post))
+                        {
+                            <button class="btn btn-danger btn-xs"
+                                    type="submit">
+                                Details
+                            </button>
+                        }
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("UserProfile_Pageload", "ProfileEMP", new { id = emp.eid }, FormMethod.Get))
+                        {
+                            <button type="submit" class="btn btn-success btn-sm">View</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (TempData["msg1"] != null)
+    {
+        <div class="alert alert-info mt-3 text-center">
+            @TempData["msg1"]
+        </div>
+    }
+</div>

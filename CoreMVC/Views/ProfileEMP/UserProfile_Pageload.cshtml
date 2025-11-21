@@ -1,0 +1,63 @@
+﻿@* @model CoreMVC.Models.Employee
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<div class="container mt-4">
+    <h3 class="mb-3 text-center">Employee Profile</h3>
+    <table class="table table-bordered table-striped text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.eid</td>
+                <td>@Model.ename</td>
+                <td>@Model.eaddr</td>
+                <td>@Model.esal</td>
+            </tr>
+        </tbody>
+    </table>
+
+    @if (TempData["msg1"] != null)
+    {
+        <div class="alert alert-info mt-3">@TempData["msg1"]</div>
+    }
+</div>
+ *@
+ @model CoreMVC.Models.Employee
+ <h1>Profile View</h1>
+ <form asp-action="Profile_updateClick" class="form-horizontal" method="post">
+     <div class="form-group">
+         <label class="control-label">Id</label>
+         @Html.TextBoxFor(Model=>Model.eid)
+     </div>
+    <div class="form-group">
+        <label class="control-label">Name</label>
+        @Html.TextBoxFor(Model => Model.ename)
+    </div>
+    <div class="form-group">
+        <label class="control-label">Address</label>
+        @Html.TextBoxFor(Model => Model.eaddr)
+    </div>
+    <div class="form-group">
+        <label class="control-label">Salary</label>
+        @Html.TextBoxFor(Model => Model.esal)
+    </div>
+    <div>
+        <input type="submit" value="Update"/>
+    </div>
+ </form>
+@{
+    if (TempData["msg1"] != null)
+    {
+        <script>
+        alert('@TempData["msg1"]');
+        </script>
+    }
+}
